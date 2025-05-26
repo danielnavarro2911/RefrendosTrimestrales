@@ -12,25 +12,21 @@ class RefrendosTrimestrales:
         '''
         Metodo para extraer todos los montos de ESTADO DE SITUACIÓN FINANCIERA
         '''
-        texto=self.pdf[pagina]
+        texto = self.pdf[pagina]
         lineas = texto.strip().split('\n')
         lineas = [line.strip() for line in lineas if line.strip() and not re.match(r'^\-?\d+\-?$', line.strip()) and 'Nota' not in line and 'auditado' not in line]
-
-        # Expresión regular para capturar descripción + 3 montos al final
-        patron = re.compile(
-            r'^(.*?)\s+([\(\)\d\.\-]+)\s+([\(\)\d\.\-]+)\s+([\(\)\d\.\-]+)$'
-        )
-
-        # Extraer coincidencias válidas
+    
+        # Nueva expresión regular para encontrar múltiples bloques por línea
+        patron = re.compile(r'([A-Za-zÁÉÍÓÚÑáéíóúñ\d\s\.\-/]+?)\s+([\(\)\d\.\-]+)\s+([\(\)\d\.\-]+)\s+([\(\)\d\.\-]+)(?=\s+[A-Za-z]|$)')
+    
         datos = []
         for linea in lineas:
-            match = patron.search(linea)
-            if match:
-                descripcion = match.group(1).strip()
-                valores = match.group(2), match.group(3), match.group(4)
+            matches = patron.findall(linea)
+            for match in matches:
+                descripcion = match[0].strip()
+                valores = match[1], match[2], match[3]
                 datos.append([descripcion] + list(valores))
-
-        # Crear DataFrame
+    
         df = pd.DataFrame(datos, columns=['ACTIVO', 'Monto Actual', 'Trimestre Anterior', 'Anio Pasado'])
 
         # Limpiar valores numéricos
