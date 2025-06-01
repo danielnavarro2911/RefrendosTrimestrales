@@ -3,6 +3,10 @@ class EstadosFinancieros:
 
         '''
         Clase para cargar los datos de los estados financieros que da finanzas
+        Primero se debe identificar cada hoja de los excels, para esto se usa el metodo identificar_hoja
+        luego, cargamos los datos con el metodo cargar_excel
+
+        Limpiamos los datos con limpiar_datos
         '''
 
         self.ruta_estados_financieros=ruta_estados_financieros
@@ -35,7 +39,7 @@ class EstadosFinancieros:
 
         return df
 
-    def limpiar_datos_plantilla(self,df):
+    def limpiar_datos(self,df):
 
         '''
         Una vez cargado los datos, elimina todas las filas y columnas no importantes
