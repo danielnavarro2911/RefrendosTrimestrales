@@ -3,6 +3,9 @@ import pandas as pd
 import re
 
 class RefrendosTrimestrales:
+    '''
+    Clase para extraer los estados financieros de los pdfs que da finanzas
+    '''
     def __init__(self, pdf_path):
         self.pdf_path = pdf_path
         self.reader = PyPDF2.PdfReader(pdf_path)
