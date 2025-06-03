@@ -41,7 +41,7 @@ class EstadosFinancieros:
         return resultados
     def cambiar_hojas(self,res):
         excel = input('Digita excel a cambiar: ')
-        for i in res[excel]
+        for i in res[excel]:
             hoja = input(f'Digita hoja a cambiar para {i} ')
             if hoja != '':
                 res[excel][i] = hoja
