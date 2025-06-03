@@ -127,7 +127,8 @@ class EstadosFinancieros:
         df['Cuenta'] = df['Cuenta'].str.replace(r'\b\d+\.[a-zA-Z]{2}\b', '', regex=True).str.strip()
         df['Cuenta'] = df['Cuenta'].str.replace(r'/', '').str.strip()
         df['Cuenta'] = df['Cuenta'].str.replace('(','').str.replace(')','').str.replace(',','').str.strip()
-        df.columns = ['Cuenta','Monto Actual','Trimestre Anterior','Anio Pasado']
+        try: df.columns = ['Cuenta','Monto Actual','Trimestre Anterior','Anio Pasado']
+        except: df.columns = ['Cuenta','Monto Actual','Anio Pasado']
         df['Total']=df.iloc[:, 1:].sum(axis=1)
 
         return df
