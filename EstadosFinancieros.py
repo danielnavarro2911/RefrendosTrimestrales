@@ -39,6 +39,14 @@ class EstadosFinancieros:
                 for sheet in ["ESTADO DE SITUACION FINANCIERA","ESTADO DE RESULTADOS","CAMBIOS EN EL PATRIMONIO"]:
                     resultados[excel][sheet]=input(f'hoja de {sheet} de {excel} ')
         return resultados
+    def cambiar_hojas(self,res):
+        excel = input('Digita excel a cambiar: ')
+        for i in res[excel]
+            hoja = input(f'Digita hoja a cambiar para {i} ')
+            if hoja != '':
+                res[excel][i] = hoja
+        return res
+
     
     def cargar_excel(self,excel,sheet):
         df = pd.read_excel(self.ruta_estados_financieros+excel,sheet_name=sheet)
