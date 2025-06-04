@@ -78,7 +78,11 @@ class EstadosFinancieros:
         
         df=df.iloc[:, ~np.isin(range(df.shape[1]), hidden_cols_idx)]
 
-        df=df.drop(hidden_rows_idx)
+        for i in hidden_rows_idx:
+            try:
+                df=df.drop(i)
+            except:
+                pass
 
         df=df.reset_index(drop=True)
 
