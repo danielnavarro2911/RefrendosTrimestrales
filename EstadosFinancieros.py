@@ -78,6 +78,8 @@ class EstadosFinancieros:
 
         df=df.drop(hidden_rows_idx)
 
+        df=df.reset_index(drop=True)
+
         return df
 
     def limpiar_datos(self,df):
