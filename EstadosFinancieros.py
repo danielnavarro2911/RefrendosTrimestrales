@@ -65,8 +65,10 @@ class EstadosFinancieros:
         hidden_cols_idx = []
         for col_letter, col_dim in worksheet.column_dimensions.items():
             if col_dim.hidden:
-                col_idx = string.ascii_uppercase.index(col_letter.upper())
-                hidden_cols_idx.append(col_idx)
+                try:
+                    col_idx = string.ascii_uppercase.index(col_letter.upper())
+                    hidden_cols_idx.append(col_idx)
+                except:pass
 
 
 
