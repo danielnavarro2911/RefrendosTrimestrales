@@ -43,6 +43,6 @@ class PlantillasTrimestrales:
             df_vic.iloc[:,[1,2]] = df_vic.iloc[:,[1,2]].apply(pd.to_numeric, errors='coerce')
         
         df_vic.loc[:,['Monto Actual','Trimestre Anterior','Anio Pasado']]=0
-        df_vic['Total']=df_vic.iloc[:, 1:].sum(axis=1)
+        df_vic.loc[:,'Total']=df_vic.iloc[:, 1:].sum(axis=1)
 
         return df_vic
