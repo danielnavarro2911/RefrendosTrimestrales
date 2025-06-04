@@ -3,6 +3,9 @@ from datetime import datetime
 import os
 import pandas as pd
 from openpyxl import load_workbook
+import openpyxl
+import string
+import numpy as np
 
 class EstadosFinancieros:
     def __init__(self,ruta_estados_financieros) -> None:
@@ -49,7 +52,31 @@ class EstadosFinancieros:
 
     
     def cargar_excel(self,excel,sheet):
-        df = pd.read_excel(self.ruta_estados_financieros+excel,sheet_name=sheet)
+        archivo = self.ruta_estados_financieros+excel
+
+        workbook = openpyxl.load_workbook(archivo)
+        worksheet = workbook[sheet]
+
+        # Identificar filas ocultas
+        hidden_rows_idx = []
+        for row_idx, row_dim in worksheet.row_dimensions.items():
+            if row_dim.hidden:
+                hidden_rows_idx.append(row_idx-1)  # openpyxl es 1-based, pandas es 0-based
+        hidden_cols_idx = []
+        for col_letter, col_dim in worksheet.column_dimensions.items():
+            if col_dim.hidden:
+                col_idx = string.ascii_uppercase.index(col_letter.upper())
+                hidden_cols_idx.append(col_idx)
+
+
+
+        df = pd.read_excel(archivo,sheet_name=sheet)
+
+
+        
+        df=df.iloc[:, ~np.isin(range(df.shape[1]), hidden_cols_idx)]
+
+        df=df.drop(hidden_rows_idx)
 
         return df
 
