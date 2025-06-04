@@ -42,7 +42,7 @@ class PlantillasTrimestrales:
             df_vic = df_vic[['Unnamed: 19','Unnamed: 23','Unnamed: 25']]
             df_vic.iloc[:,[1,2]] = df_vic.iloc[:,[1,2]].apply(pd.to_numeric, errors='coerce')
         
-        
+        df_vic[['Monto Actual','Trimestre Anterior','Anio Pasado']]=0
         df_vic['Total']=df_vic.iloc[:, 1:].sum(axis=1)
 
         return df_vic
