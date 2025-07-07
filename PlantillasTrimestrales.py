@@ -16,11 +16,11 @@ class PlantillasTrimestrales:
         skiprows = 38 if sheet == 'SF' else 39
 
         df_vic=pd.read_excel(plantilla_path,sheet_name=sheet,skiprows=skiprows,usecols=usecols)
-        df_vic=self.__limpiar_datos_plantilla(df_vic,sheet)
+        #df_vic=self.__limpiar_datos_plantilla(df_vic,sheet)
 
         return df_vic
 
-    def __limpiar_datos_plantilla(self, df_vic,sheet):
+    def limpiar_datos_plantilla(self, df_vic,sheet):
         df_vic.iloc[:,0]=df_vic.iloc[:,0].str.replace(r'\(\d+\)','',regex=True).str.strip()
         df_vic.iloc[:,0]=df_vic.iloc[:,0].str.lower().str.replace('.m','').str.replace('.','')
         df_vic.iloc[:,0] = df_vic.iloc[:,0].str.replace('(','').str.replace(')','').str.replace(',','').str.strip()
