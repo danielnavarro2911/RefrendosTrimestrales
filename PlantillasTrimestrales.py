@@ -12,7 +12,8 @@ class PlantillasTrimestrales:
         plantilla = [i for i in self.excels if subsidiaria in i][0]
         plantilla_path=self.ruta_plantillas+plantilla
 
-        usecols = 'R:X' if sheet == 'SF' else 'T:AB'
+        #usecols = 'R:X' if sheet == 'SF' else 'T:AB'
+        usecols = 'R,V,W,X' if sheet == 'SF' else 'T,X,Z,AA,AB'
         skiprows = 38 if sheet == 'SF' else 39
 
         df_vic=pd.read_excel(plantilla_path,sheet_name=sheet,skiprows=skiprows,usecols=usecols)
